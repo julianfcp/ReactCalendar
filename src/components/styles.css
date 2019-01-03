@@ -1,0 +1,22 @@
+.Calendar {
+    margin: auto;
+}
+.head {
+    background-color: #888;
+}
+.monthTitle {
+    color: blueviolet;
+}
+.calendarTitle {
+    margin: auto;
+    font-size: 40px;
+    font-weight: bold;
+}
+.gridCont {
+    margin-top: 15px;
+}
+svg {
+    margin: auto;
+    padding: 0 50px;
+    fill: white;
+}
