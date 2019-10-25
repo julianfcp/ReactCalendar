@@ -18,8 +18,8 @@ const styles = theme => ({
 
 
 
-class Years extends Component {
-
+class Calendar extends Component {
+  
   render () {
     const { classes, year } = this.props;
 
@@ -71,8 +71,8 @@ class Years extends Component {
   }
 }
 
-Years.propTypes = {
+Calendar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Years);
+export default withStyles(styles)(Calendar);

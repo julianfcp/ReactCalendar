@@ -20,3 +20,13 @@ svg {
     padding: 0 50px;
     fill: white;
 }
+
+td {
+    cursor: pointer;
+}
+.buttonTrue {
+    background-color: white;
+}
+.buttonFalse {
+    background-color: yellow;
+}
