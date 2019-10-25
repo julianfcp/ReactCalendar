@@ -76,17 +76,6 @@ class Month extends Component {
     fillMonthColumns = (i, weekDay, numberDays, counterDay) => {
         var cols = [];
         var retorno = [];
-        var actualRow = i;
-        /*
-        for (var j=0; j<7; j++) {
-            if((i === 0 && j < weekDay) || numberDays < counterDay+ 1) {
-                cols.push(<td key={j}>&nbsp;</td>);
-            }
-            else {
-                counterDay = topDayCounter++;
-                cols.push(<td id={this.state.month+'day-'+counterDay} onClick={this.handleDays} key={'day-'+j}>{counterDay}</td>);
-            }
-        }*/
         
         cols = new Array(7).fill(0).map( ( zero, arrayCounter ) => {
             
@@ -97,9 +86,9 @@ class Month extends Component {
                 return (
                     counterDay ++,
                     <td 
-                        id={this.state.month+counterDay} 
+                        id={this.state.month+'-'+counterDay} 
                         key={this.state.month+counterDay} 
-                        onClick={() => this.handleDays(actualRow,counterDay)}>
+                        onClick={(e) => this.handleDays(e.target.id)}>
                         {counterDay}
                     </td>)
                 }
@@ -111,16 +100,9 @@ class Month extends Component {
     }
 
     // When press a day
-    handleDays = (actualRow,counterDay) => {
-        
-        alert(actualRow+'-'+counterDay);
-        //alert(this.state.month+counterDay);
+    handleDays = (targetId) => {
 
-        //alert(document.getElementById("Month").rows[actualRow].cells[3].innerHTML);
-        //document.getElementById(this.state.month+counterDay).style.background = 'gray';
-
-        
-
+        document.getElementById(targetId).style.background = 'gray';
 
     }
 
