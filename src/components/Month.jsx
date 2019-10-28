@@ -1,5 +1,23 @@
 import React, { Component } from "react";
-import './styles.css';
+import { getNumberOfDaysInMonth, getDayInMonth } from '../services';
+import { withStyles } from '@material-ui/core/styles';
+import  Modal  from '@material-ui/core/Modal';
+import  Fade  from '@material-ui/core/Fade';
+import  Backdrop  from '@material-ui/core/Backdrop';
+import './styles.css'
+
+const styles = theme => ({
+    modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      
+    },
+    paper: {
+        border: '2px solid #000',
+    },
+  });
+
 
 
 class Month extends Component {
@@ -11,9 +29,12 @@ class Month extends Component {
             counter: 0,
             year: this.props.year, // Recibo el anio desde Calendar
             month: this.props.monthNumber, // Recibo el numero del mes desde Year
+            open: false,
         };
+        
 
     }
+    
     componentDidMount(weekDay, numberDays) {
         console.log('GrandChild did mount.');
         this.fetchCalendar();
@@ -38,21 +59,11 @@ class Month extends Component {
     
     fetchCalendar() {
         // las siguientes variables usan this.get... ya que las funciones estan dentro de la clase
-        var numberDays = this.getNumberOfDaysInMonth(this.state.month, this.state.year);
-        var weekDay = this.getDayInMonth(this.state.year, this.state.month);
+        var numberDays = getNumberOfDaysInMonth(this.state.month, this.state.year);
+        var weekDay = getDayInMonth(this.state.year, this.state.month);
         console.log("Dia", weekDay);
         console.log("Numero de Dias: ",numberDays);
         this.fillMonthRows(weekDay, numberDays, this.state.month);
-    }
-
-    getNumberOfDaysInMonth = (month, year) =>  {
-        // devuelve el numero de dias de un mes
-        return new Date(year, month, 0).getDate();
-    };
-
-    getDayInMonth = (year,month) => {
-        // devuelve el numero del primer dia del mes
-        return new Date(year+','+month).getDay();
     }
 
     fillMonthRows = (weekDay, numberDays, month) => {
@@ -67,6 +78,9 @@ class Month extends Component {
             );
             counterDay = this.fillMonthColumns(i, weekDay, numberDays,counterDay)[1];
         }
+        // this.fillMonthColumns(i, weekDay, numberDays, counterDay)[0] -> primera posicion de retorno
+        // counterDay = this.fillMonthColumns(i, weekDay, numberDays,counterDay)[1] -> segunda posicion de retorno
+        // retorno viene de la funcion que pinta las columnas (abajo)
         // actualiza el state.rows el cual es la cuadrilla de cada mes
         this.setState({rows: rows}, function(){
             //console.log(this.state.rows);
@@ -78,11 +92,10 @@ class Month extends Component {
         var retorno = [];
         
         cols = new Array(7).fill(0).map( ( zero, arrayCounter ) => {
-            
             if((i === 0 && arrayCounter < weekDay) || numberDays < counterDay+ 1) {
                 return(<td id={arrayCounter} key={arrayCounter}>&nbsp;</td>);
             }else{
-            
+            // e.target.id obedece al event listener id devuelve el id a la funcion handleDays
                 return (
                     counterDay ++,
                     <td 
@@ -94,7 +107,6 @@ class Month extends Component {
                 }
             }
         )
-
         retorno = [cols, counterDay];
         return retorno;
     }
@@ -103,8 +115,17 @@ class Month extends Component {
     handleDays = (targetId) => {
 
         document.getElementById(targetId).style.background = 'gray';
+        this.handleOpen();
 
     }
+
+    handleOpen = () => {
+        this.setState({open: true});
+    };
+    
+    handleClose = () => {
+        this.setState({open: false});
+    };
 
     render() {
         const {rows} = this.state; // Destructuring:  rows => this.state.rows
@@ -121,11 +142,31 @@ class Month extends Component {
                         {rows}
                     </tbody>
                 </table>
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={styles.modal}
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    closeaftertransition="true"
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                    timeout: 500,
+                    }}
+                >
+                    <Fade in={this.state.open} timeout={10}>
+                    <div className="modalPaper">
+                        <h2 id="transition-modal-title">Transition modal</h2>
+                        <p id="transition-modal-description">react-transition-group animates me.</p>
+                    </div>
+                    </Fade>
+                </Modal>
            </div>
+           
         );
     }
 
 
 }
 
-export default Month;
+export default withStyles(styles)(Month);
