@@ -143,8 +143,6 @@ class Month extends Component {
                     </tbody>
                 </table>
                 <Modal
-                    aria-labelledby="transition-modal-title"
-                    aria-describedby="transition-modal-description"
                     className={styles.modal}
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -156,8 +154,8 @@ class Month extends Component {
                 >
                     <Fade in={this.state.open} timeout={10}>
                     <div className="modalPaper">
-                        <h2 id="transition-modal-title">Transition modal</h2>
-                        <p id="transition-modal-description">react-transition-group animates me.</p>
+                        <input className="modalTitle" type="text" placeholder="Add event title"/>
+                        <p className="modalContent"> react-transition-group animates me.</p>
                     </div>
                     </Fade>
                 </Modal>

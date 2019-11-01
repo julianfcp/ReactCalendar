@@ -17,10 +17,8 @@
 }
 svg {
     margin: auto;
-    padding: 0 50px;
     fill: white;
 }
-
 td {
     cursor: pointer;
 }
@@ -38,10 +36,25 @@ td {
     left:0; right:0;
     top:0; bottom:0;
     margin:auto;
+    border-radius: 10px;
 
     /*this to solve "the content will not be cut when the window is smaller than the content": */
     max-width:100%;
     max-height:100%;
     overflow:auto;
     
+}
+.modalTitle {
+    margin: 20px 20px 20px 25%;
+    width: 50%;
+    text-align: center;
+    outline: 0;
+    border-bottom: 1px solid #3f51b5;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+.modalContent {
+    margin: auto;
+    width: 80%;
 }
