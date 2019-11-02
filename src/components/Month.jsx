@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import  Modal  from '@material-ui/core/Modal';
 import  Fade  from '@material-ui/core/Fade';
 import  Backdrop  from '@material-ui/core/Backdrop';
+import Button from '@material-ui/core/Button';
 import './styles.css'
 
 const styles = theme => ({
@@ -11,13 +12,11 @@ const styles = theme => ({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      
     },
     paper: {
         border: '2px solid #000',
     },
   });
-
 
 
 class Month extends Component {
@@ -30,11 +29,13 @@ class Month extends Component {
             year: this.props.year, // Recibo el anio desde Calendar
             month: this.props.monthNumber, // Recibo el numero del mes desde Year
             open: false,
+            categoryValue: 'Holiday',
         };
         
 
     }
     
+
     componentDidMount(weekDay, numberDays) {
         console.log('GrandChild did mount.');
         this.fetchCalendar();
@@ -126,6 +127,9 @@ class Month extends Component {
     handleClose = () => {
         this.setState({open: false});
     };
+    handleCategory = (event) => {
+        this.setState({categoryValue: event.target.value});
+    };
 
     render() {
         const {rows} = this.state; // Destructuring:  rows => this.state.rows
@@ -155,7 +159,25 @@ class Month extends Component {
                     <Fade in={this.state.open} timeout={10}>
                     <div className="modalPaper">
                         <input className="modalTitle" type="text" placeholder="Add event title"/>
-                        <p className="modalContent"> react-transition-group animates me.</p>
+                        <label class="container">One
+                            <input type="radio" checked="checked" name="radio" />
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container">Two
+                        <input type="radio" name="radio" />
+                        <span class="checkmark"></span>
+                        </label>
+                        <label class="container">Three
+                        <input type="radio" name="radio" />
+                        <span class="checkmark"></span>
+                        </label>
+                        <label class="container">Four
+                        <input type="radio" name="radio" />
+                        <span class="checkmark"></span>
+                        </label>
+                        <Button variant="contained" color="primary">
+                            Primary
+                        </Button>
                     </div>
                     </Fade>
                 </Modal>
