@@ -25,10 +25,11 @@ class App extends Component {
   }
 
   render() {
+    
     return (
       <div className="App">
-        <NavBar year={this.state.year} buttonClickL={this.changeYearL.bind(this)} buttonClickR={this.changeYearR.bind(this)} />
-        <Calendar  year={this.state.year}/>
+      <NavBar year={this.state.year} buttonClickL={this.changeYearL.bind(this)} buttonClickR={this.changeYearR.bind(this)} />
+      <Calendar  year={this.state.year}/>
       </div>
     );
   }

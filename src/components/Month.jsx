@@ -6,6 +6,7 @@ import  Fade  from '@material-ui/core/Fade';
 import  Backdrop  from '@material-ui/core/Backdrop';
 import Button from '@material-ui/core/Button';
 import './styles.css'
+import ModalForm from "./modalForm";
 
 const styles = theme => ({
     modal: {
@@ -159,22 +160,7 @@ class Month extends Component {
                     <Fade in={this.state.open} timeout={10}>
                     <div className="modalPaper">
                         <input className="modalTitle" type="text" placeholder="Add event title"/>
-                        <label class="container">One
-                            <input type="radio" checked="checked" name="radio" />
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container">Two
-                        <input type="radio" name="radio" />
-                        <span class="checkmark"></span>
-                        </label>
-                        <label class="container">Three
-                        <input type="radio" name="radio" />
-                        <span class="checkmark"></span>
-                        </label>
-                        <label class="container">Four
-                        <input type="radio" name="radio" />
-                        <span class="checkmark"></span>
-                        </label>
+                        <ModalForm />
                         <Button variant="contained" color="primary">
                             Primary
                         </Button>
